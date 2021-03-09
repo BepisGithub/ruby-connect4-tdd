@@ -21,4 +21,28 @@ class Board
     end
     occupied_slots_array
   end
+
+  def won?
+    won = false
+    occupied_slots_array = occupied_slots
+    first_player_symbol = (occupied_slots_array[0])[2]
+    first_player_spots = []
+    second_player_symbol = nil
+    second_player_spots = []
+    occupied_slots_array.each do |slot|
+      if slot[2] == first_player_symbol
+        first_player_spots.push(slot)
+      else
+        second_player_symbol = slot[2] if second_player_symbol.nil?
+        second_player_spots.push(slot)
+      end
+    end
+    return won if first_player_spots.count < 4 && second_player_spots.count < 4
+    
+    adjacent = []
+    first_player_spots.each do |spot|
+      adjacent.push(spot)
+    end
+    won
+  end
 end
