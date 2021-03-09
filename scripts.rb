@@ -5,5 +5,10 @@ class Board
 
   def write(horizontal_coord, vertical_coord, symbol)
     return 'error' unless symbol.is_a? String
+    if @map[horizontal_coord][vertical_coord] == ' '
+      @map[horizontal_coord][vertical_coord] = symbol
+    else
+      return 'error: occupied slot'
+    end
   end
 end
