@@ -1,9 +1,16 @@
 require './spec/spec_helper'
 require './scripts'
 # YOU NEED TO MAKE THE PROGRAM USED A GRAPH TO REPRESENT THE GRID LIKE YOU DID IN THE KNIGHTS TRAVAILS THING
+
+describe LinkedNode do
+  
+end
+
+
+
 describe Board do
   describe '#initialize' do
-    it 'creates a graph to hold the board' do
+    xit 'creates a graph to hold the board' do
       board = Board.new
       expect(board.instance_variable_get(:@map).is_a? LinkedList).to be true
     end
