@@ -1,6 +1,6 @@
 require './spec/spec_helper'
 require './scripts'
-
+# YOU NEED TO MAKE THE PROGRAM USED A GRAPH TO REPRESENT THE GRID LIKE YOU DID IN THE KNIGHTS TRAVAILS THING
 describe Board do
   describe '#initialize' do
     it 'creates a multidimensional array that uses strings with a space in for the empty values' do
