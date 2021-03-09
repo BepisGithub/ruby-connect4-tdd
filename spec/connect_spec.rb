@@ -3,13 +3,13 @@ require './scripts'
 # YOU NEED TO MAKE THE PROGRAM USED A GRAPH TO REPRESENT THE GRID LIKE YOU DID IN THE KNIGHTS TRAVAILS THING
 describe Board do
   describe '#initialize' do
-    it 'creates a multidimensional array that uses strings with a space in for the empty values' do
+    it 'creates a graph to hold the board' do
       board = Board.new
-      expect(board.instance_variable_get(:@map)).to eq(Array.new(7) {Array.new(6, ' ')})
+      expect(board.instance_variable_get(:@map).is_a? LinkedList).to be true
     end
   end
   describe '#write' do
-    it 'occupies a slot with a given symbol' do
+    xit 'occupies a slot with a given symbol' do
       board = Board.new
       horizontal_coord = 0
       vertical_coord = 0
@@ -19,7 +19,7 @@ describe Board do
       expectation[horizontal_coord][vertical_coord] = 'x'
       expect(board.instance_variable_get(:@map)).to eq(expectation)
     end
-    it 'doesn\'t override an occupied slot' do
+    xit 'doesn\'t override an occupied slot' do
       board = Board.new
       board.write(0, 0, 'x')
       expect(board.write(0, 0, 'o')).to eq('error: occupied slot')
@@ -27,7 +27,7 @@ describe Board do
   end
 
   describe '#occupied_slots' do
-    it 'returns an array of coordinates of each occupied slot' do
+    xit 'returns an array of coordinates of each occupied slot' do
       board = Board.new
       board.write(0, 0, 'x')
       expect(board.occupied_slots).to eq([[0, 0, 'x']])
@@ -35,7 +35,7 @@ describe Board do
   end
 
   describe '#won?' do
-    it 'checks each occupied slot. for each occupied slot it checks all adjacent positions and marks down the current one
+    xit 'checks each occupied slot. for each occupied slot it checks all adjacent positions and marks down the current one
     in an array. then it checks the adjacent ones of each position unless it is in the array. if there are four then return true' do
       board = Board.new
       board.write(0, 0, 'x')
