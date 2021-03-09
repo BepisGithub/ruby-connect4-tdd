@@ -3,7 +3,12 @@ require './scripts'
 # YOU NEED TO MAKE THE PROGRAM USED A GRAPH TO REPRESENT THE GRID LIKE YOU DID IN THE KNIGHTS TRAVAILS THING
 
 describe LinkedNode do
-  
+  describe 'the data it holds' do
+    describe 'it holds data for itself' do
+      new_node = LinkedNode.new
+      expect(new_node.data).not_to be nil
+    end
+  end
 end
 
 
