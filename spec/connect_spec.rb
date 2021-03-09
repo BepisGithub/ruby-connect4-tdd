@@ -17,5 +17,10 @@ describe Board do
       board.write(horizontal_coord, vertical_coord, symbol)
       expect(board.instance_variable_get(:@map)).not_to eq(Array.new(7, Array.new(6, ' ')))
     end
+    it 'doesn\'t override an occupied slot' do
+      board = Board.new
+      board.write(0, 0, 'x')
+      expect(board.write(0, 0, 'o')).to eq('error: occupied slot')
+    end
   end
 end
