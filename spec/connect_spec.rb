@@ -8,13 +8,13 @@ describe Board do
       expect(board.instance_variable_get(:@map)).to eq(Array.new(7, Array.new(6, ' ')))
     end
   end
-  describe '#draw' do
+  describe '#write' do
     it 'occupies a slot with a given symbol' do
       board = Board.new
       horizontal_coord = 0
       vertical_coord = 0
       symbol = 'x'
-      board.draw(horizontal_coord, vertical_coord, symbol)
+      board.write(horizontal_coord, vertical_coord, symbol)
       expect(board.instance_variable_get(:@map)).not_to eq(Array.new(7, Array.new(6, ' ')))
     end
   end
