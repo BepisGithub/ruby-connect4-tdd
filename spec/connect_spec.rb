@@ -5,7 +5,7 @@ describe Board do
   describe '#initialize' do
     it 'creates a multidimensional array that uses strings with a space in for the empty values' do
       board = Board.new
-      expect(board.instance_variable_get(:@map)).to eq(Array.new(7, Array.new(6, ' ')))
+      expect(board.instance_variable_get(:@map)).to eq(Array.new(7) {Array.new(6, ' ')})
     end
   end
   describe '#write' do
@@ -15,7 +15,9 @@ describe Board do
       vertical_coord = 0
       symbol = 'x'
       board.write(horizontal_coord, vertical_coord, symbol)
-      expect(board.instance_variable_get(:@map)).not_to eq(Array.new(7, Array.new(6, ' ')))
+      expectation = Array.new(7) {Array.new(6, ' ')}
+      expectation[horizontal_coord][vertical_coord] = 'x'
+      expect(board.instance_variable_get(:@map)).to eq(expectation)
     end
     it 'doesn\'t override an occupied slot' do
       board = Board.new
@@ -28,7 +30,7 @@ describe Board do
     it 'returns an array of coordinates of each occupied slot' do
       board = Board.new
       board.write(0, 0, 'x')
-      expect(board.occupied_slots).to eq([0, 0])
+      expect(board.occupied_slots).to eq([[0, 0, 'x']])
     end
   end
 
