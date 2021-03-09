@@ -24,6 +24,15 @@ describe Board do
     end
   end
   describe '#won?' do
+    it 'checks each occupied slot. for each occupied slot it checks all adjacent positions and marks down the current one
+    in an array. then it checks the adjacent ones of each position unless it is in the array. if there are four then return true' do
+      board = Board.new
+      board.write(0, 0, 'x')
+      board.write(1, 1, 'x')
+      board.write(2, 2, 'x')
+      board.write(3, 3, 'x')
+      expect(board.won?).to be_truthy
+    end
     
   end
 end
