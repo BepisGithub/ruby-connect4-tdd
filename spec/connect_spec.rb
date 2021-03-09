@@ -23,4 +23,7 @@ describe Board do
       expect(board.write(0, 0, 'o')).to eq('error: occupied slot')
     end
   end
+  describe '#won?' do
+    
+  end
 end
