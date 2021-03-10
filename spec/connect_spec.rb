@@ -99,6 +99,16 @@ describe LinkedList do
       list = LinkedList.new(head)
       expect(list.size).to eql(2)
     end
+    it 'returns 3 when the list has three nodes' do
+      head = LinkedNode.new('one', LinkedNode.new('two', LinkedNode.new('three')))
+      list = LinkedList.new(head)
+      expect(list.size).to eql(3)
+    end
+    xit 'returns 4 when the list has four nodes' do
+      head = LinkedNode.new('one', LinkedNode.new('two'))
+      list = LinkedList.new(head)
+      expect(list.size).to eql(2)
+    end
   end
 end
 
