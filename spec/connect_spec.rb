@@ -118,6 +118,17 @@ describe LinkedList do
       list = LinkedList.new(head)
       expect((list.occupied_nodes)[0].data).to eq(pos_node)
     end
+    it 'returns the correct amount of nodes' do
+      pos_node = PositionNode.new([20, 20])
+      pos_node.occupant = ['o']
+      head = LinkedNode.new(pos_node)
+      list = LinkedList.new(head)
+      expect((list.occupied_nodes).size).to eq(1)
+    end
+    it 'returns an empty array when no nodes are occupied' do
+      list = LinkedList.new
+      expect((list.occupied_nodes).empty?).to be true
+    end
   end
 end
 
@@ -212,7 +223,10 @@ describe Board do
     describe 'checks each occupied slot, then splits them up into two arrays of player 1 and 2' do
       describe 'checks the first player for a horizontal win, a vertical win and a diagonal win. then it checks the second player' do
         it 'checks the first player for a horizontal win, a vertical win or a diagonal win. then it checks the second player' do
-          
+          board = Board.new
+          board.occupy(1, 'o')
+          board.occupy(2, 'x')
+          # expect(board.won?).to eq('ar')
         end
       end
     end
