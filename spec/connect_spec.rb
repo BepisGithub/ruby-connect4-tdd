@@ -253,5 +253,13 @@ describe Board do
       board = Board.new
       expect(board.horizontal_won?([])).to be false
     end
+    it 'returns false if there are three horizontal pieces in a row' do
+      board = Board.new
+      3.times do |i|
+        board.occupy(i + 1, 'o')
+      end
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.horizontal_won?(occupied_nodes)).to be false
+    end
   end
 end
