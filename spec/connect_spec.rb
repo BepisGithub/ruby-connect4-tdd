@@ -130,13 +130,23 @@ describe PositionNode do
   end
 end
 
-describe Board do
+describe Graph do
   describe 'the data it holds' do
-    it 'holds a linked list that is 7 by 6 nodes long' do
-
+    it 'holds a linked list as the root' do
+      graph = Graph.new
+      expect(graph.root.is_a? LinkedList).to be true
     end
   end
 end
+
+# describe Board do
+#   describe 'the data it holds' do
+#     it 'holds a graph which holds a linked list that is 7 by 6 nodes long' do
+#       board = Board.new
+
+#     end
+#   end
+# end
 
 
 # describe Board do
