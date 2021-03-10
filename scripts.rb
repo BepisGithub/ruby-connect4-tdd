@@ -115,10 +115,10 @@ class Board
     horizontal = 1
     nodes.each do |linked_node|
       if linked_node.data.position[0] == horizontal
-        print linked_node.data.position.to_s
+        print linked_node.data.position.to_s # TODO: Change this to display the occupant
       else
         print "\n"
-        print linked_node.data.position.to_s
+        print linked_node.data.position.to_s # TODO: Change this to display the occupant
         horizontal = linked_node.data.position[0]
       end
     end
