@@ -67,3 +67,12 @@ class PositionNode
     @adjacency_list = LinkedList.new unless adjacency_list.is_a? LinkedList
   end
 end
+
+class Graph
+  attr_accessor :root
+
+  def initialize 
+    @root = LinkedList.new
+  end
+
+end
