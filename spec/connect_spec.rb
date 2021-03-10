@@ -110,6 +110,15 @@ describe LinkedList do
       expect(list.size).to eql(4)
     end
   end
+  describe '#occupied_nodes' do
+    it 'returns an array of the occupied nodes when there are occupied nodes' do
+      pos_node = PositionNode.new([20, 20])
+      pos_node.occupant = ['o']
+      head = LinkedNode.new(pos_node)
+      list = LinkedList.new(head)
+      expect((list.occupied_nodes)[0].data).to eq(pos_node)
+    end
+  end
 end
 
 describe PositionNode do
@@ -208,14 +217,14 @@ describe Board do
       end
     end
   end
-  describe '#horizontal_won?' do
-    it 'returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
-      board = Board.new
-      symbol = 'o'
-      4.times do |i|
-        board.occupy(i + 1, symbol)
-      end
-      expect(board.horizontal_won?).to eql(symbol)
-    end
-  end
+  # describe '#horizontal_won?' do
+  #   it 'returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
+  #     board = Board.new
+  #     symbol = 'o'
+  #     4.times do |i|
+  #       board.occupy(i + 1, symbol)
+  #     end
+  #     expect(board.horizontal_won?).to eql(symbol)
+  #   end
+  # end
 end

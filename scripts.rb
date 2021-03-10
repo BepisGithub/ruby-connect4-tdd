@@ -69,6 +69,12 @@ class LinkedList
     end
     nodes
   end
+
+  def occupied_nodes
+    nodes = traverse
+    nodes.reject! { |node| node.data.occupant == [' '] }
+    nodes
+  end
 end
 
 class PositionNode
@@ -139,5 +145,13 @@ class Board
       node_to_occupy = node if node.data.position[0] == column && node.data.occupant == [' ']
     end
     node_to_occupy.data.occupant = [symbol]
+  end
+
+  def horizontal_won?
+
+  end
+
+  def won?
+
   end
 end
