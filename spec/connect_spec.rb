@@ -65,6 +65,15 @@ describe LinkedList do
   end
 end
 
+describe PositionNode do
+  describe 'the data it holds' do
+    it 'holds the position data for itself' do
+      new_node = PositionNode.new('position')
+      expect(new_node).to be_truthy
+    end
+  end
+end
+
 
 
 # describe Board do
