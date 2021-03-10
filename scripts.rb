@@ -49,7 +49,11 @@ class LinkedList
   def size
     return 0 if @head.nil?
     counter = 1
-
+    next_node = @head.next_node
+    until next_node.nil?
+      next_node = next_node.next_node
+      counter += 1
+    end
     counter
   end
 end
