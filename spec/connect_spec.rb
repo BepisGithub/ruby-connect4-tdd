@@ -91,6 +91,15 @@ describe PositionNode do
       new_node = PositionNode.new('position')
       expect(new_node).to be_truthy
     end
+    it 'holds an adjacency list' do
+      new_node = PositionNode.new('position')
+      new_node.adjacency_list = LinkedList.new
+      expect((new_node.adjacency_list).is_a? LinkedList).to be true
+    end
+    it 'only allows a linked list to be passed for the adjacency list' do
+      new_node = PositionNode.new('position', 'false list')
+      expect((new_node.adjacency_list).is_a? LinkedList).to be true
+    end
   end
 end
 
