@@ -322,4 +322,22 @@ describe Board do
       expect(board.vertical_won?(occupied_nodes)).to be_truthy
     end
   end
+  describe '#diagonal_won?' do
+    it 'takes an array of nodes and returns the symbol (a truthy value) of the winner if there is a vertical winner' do
+      board = Board.new
+      symbol = 'o'
+      board.occupy(1, symbol)
+      2.times do
+        board.occupy(2, symbol)
+      end
+      3.times do
+        board.occupy(3, symbol)
+      end
+      4.times do
+        board.occupy(4, symbol)
+      end
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.diagonal_won?(occupied_nodes)).to be_truthy
+    end
+  end
 end
