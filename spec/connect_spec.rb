@@ -312,5 +312,14 @@ describe Board do
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.vertical_won?(occupied_nodes)).to be false
     end
+    it 'works for the second column' do
+      board = Board.new
+      symbol = 'o'
+      4.times do
+        board.occupy(2, symbol)
+      end
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.vertical_won?(occupied_nodes)).to be_truthy
+    end
   end
 end
