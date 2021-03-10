@@ -179,7 +179,7 @@ describe Board do
       node_to_occupy = nil
       nodes = board.graph.list.traverse
       nodes.each do |node|
-        node_to_occupy = node if node.data.position[1] == column
+        node_to_occupy = node if node.data.position[0] == column
       end
       expect(node_to_occupy.data.occupant).to eql(['o'])
     end
@@ -191,7 +191,7 @@ describe Board do
       node_to_occupy = nil
       nodes = board.graph.list.traverse
       nodes.each do |node|
-        node_to_occupy = node if node.data.position[1] == column
+        node_to_occupy = node if node.data.position[0] == column
       end
       board.occupy(column, symbol)
       board.occupy(column, symbol)

@@ -123,10 +123,10 @@ class Board
     vertical = 6
     nodes.each do |linked_node|
       if linked_node.data.position[1] == vertical
-        print linked_node.data.position.to_s
+        print linked_node.data.occupant.to_s
       else
         print "\n"
-        print linked_node.data.position.to_s
+        print linked_node.data.occupant.to_s
         vertical = linked_node.data.position[1]
       end
     end
@@ -136,7 +136,7 @@ class Board
     nodes = @graph.list.traverse
     node_to_occupy = nil
     nodes.each do |node|
-      node_to_occupy = node if node.data.position[1] == column && node.data.occupant == [' ']
+      node_to_occupy = node if node.data.position[0] == column && node.data.occupant == [' ']
     end
     node_to_occupy.data.occupant = [symbol]
   end
