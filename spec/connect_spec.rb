@@ -56,6 +56,13 @@ describe LinkedList do
       expect(list.tail.data).to eq('tail')
     end
   end
+  describe '#find' do
+    it 'finds a node with a passed value' do
+      new_node = LinkedNode.new('A', LinkedNode.new('B', LinkedNode.new('C', LinkedNode.new('D'))))
+      list = LinkedList.new(new_node)
+      expect((list.find('C')).data).to eq('C')
+    end
+  end
 end
 
 

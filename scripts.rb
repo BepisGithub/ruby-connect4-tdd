@@ -26,4 +26,14 @@ class LinkedList
     end
   end
 
+  def find(value)
+    return @head if @head.data == value
+    next_node = @head.next_node
+    return next_node if next_node.data == value
+    until next_node.nil?
+      return next_node if next_node.data == value
+      next_node = next_node.next_node
+    end
+  end
+
 end
