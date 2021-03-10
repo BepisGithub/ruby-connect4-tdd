@@ -48,6 +48,9 @@ class LinkedList
 
   def size
     return 0 if @head.nil?
+    counter = 1
+
+    counter
   end
 end
 
