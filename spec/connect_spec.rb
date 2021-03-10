@@ -276,6 +276,21 @@ describe Board do
       board.occupy(2, 'o')
       board.occupy(3, 'o')
       board.occupy(5, 'o')
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.horizontal_won?(occupied_nodes)).to be false
+    end
+    it 'works for the second row (and hopefully all the others)' do
+      board = Board.new
+      board.occupy(1, 'x')
+      board.occupy(2, 'o')
+      board.occupy(3, 'x')
+      board.occupy(4, 'o')
+      board.occupy(1, 'o')
+      board.occupy(2, 'o')
+      board.occupy(3, 'o')
+      board.occupy(4, 'o')
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.horizontal_won?(occupied_nodes)).to be_truthy
     end
   end
 end
