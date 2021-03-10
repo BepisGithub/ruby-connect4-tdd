@@ -233,6 +233,31 @@ class Board
     false
   end
 
+  def vertical_won?(nodes_array)
+    return false if nodes_array.empty?
+    symbol = nodes_array[0].data.occupant
+    counter = 0
+    columns = {}
+    7.times do |i|
+      columns[i + 1] = nodes_array.select { |node| node.data.position[0] == (i + 1) }
+    end
+    columns.each do |column_number, nodes_on_column|
+      next if nodes_on_column.size < 4
+      counter = 0
+      nodes_on_column.each do |node|
+        next if node.data.adjacency_list.empty?
+        adjacent_nodes = node.data.adjacency_list.traverse
+        x_coord = node.data.position[0]
+        vertical_adjacent_nodes = adjacent_nodes.select { |node| node.data[0] == x_coord }
+        next if vertical_adjacent_nodes.empty?
+        counter += 1
+      end
+    end
+    return symbol if counter == 4
+    false
+
+  end
+
   def won?
     occupied_nodes = @graph.list.occupied_nodes
     return false if occupied_nodes.empty?
