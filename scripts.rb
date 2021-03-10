@@ -124,11 +124,12 @@ class Board
     end
   end
 
-  def occupy(horizontal, vertical, symbol)
+  def occupy(column, symbol)
     nodes = @graph.list.traverse
+    node_to_occupy = nil
     nodes.each do |node|
-      node.data.occupant = symbol if node.data.position == [horizontal, vertical]
-      break if node.data.position == [horizontal, vertical]
+      node_to_occupy = node if node.data.position[1] == column && node.data.occupant == ' '
     end
+    node_to_occupy.data.occupant = symbol
   end
 end
