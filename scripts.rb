@@ -33,6 +33,7 @@ class LinkedList
   end
 
   def find(value)
+    return nil if @head.nil?
     return @head if @head.data == value
 
     next_node = @head.next_node
