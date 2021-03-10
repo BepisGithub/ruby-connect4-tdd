@@ -154,6 +154,8 @@ class Board
 
   def won?
     occupied_nodes = @graph.list.occupied_nodes
+    return false if occupied_nodes.empty?
+
     first_player_symbol = occupied_nodes[0].data.occupant
     first_player_nodes = []
     second_player_symbol = nil
@@ -166,6 +168,7 @@ class Board
         second_player_nodes.push(node)
       end
     end
-    first_player_nodes
+    return false if first_player_nodes.size < 4 && second_player_nodes.size < 4
+
   end
 end

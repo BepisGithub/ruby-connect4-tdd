@@ -222,25 +222,21 @@ describe Board do
   describe '#won?' do
     describe 'checks each occupied slot, then splits them up into two arrays of player 1 and 2' do
       describe 'checks the first player for a horizontal win, a vertical win and a diagonal win. then it checks the second player' do
-        it 'checks the first player for a horizontal win, a vertical win or a diagonal win. then it checks the second player' do
-          board = Board.new
-          board.occupy(1, 'o')
-          board.occupy(2, 'x')
-        end
         it 'returns false if the number of occupied nodes for both players are less than four' do
-          
+          board = Board.new
+          expect(board.won?).to be false
         end
       end
     end
   end
-  # describe '#horizontal_won?' do
-  #   it 'returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
-  #     board = Board.new
-  #     symbol = 'o'
-  #     4.times do |i|
-  #       board.occupy(i + 1, symbol)
-  #     end
-  #     expect(board.horizontal_won?).to eql(symbol)
-  #   end
-  # end
+  describe '#horizontal_won?' do
+    it 'returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
+      board = Board.new
+      symbol = 'o'
+      4.times do |i|
+        board.occupy(i + 1, symbol)
+      end
+      expect(board.horizontal_won?).to eql(symbol)
+    end
+  end
 end
