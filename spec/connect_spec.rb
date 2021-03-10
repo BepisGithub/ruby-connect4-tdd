@@ -164,6 +164,12 @@ describe Board do
       end
     end
   end
+  describe '#display' do
+    it 'displays the graph in a format the users can visualise' do
+      board = Board.new
+      board.display
+    end
+  end
 end
 
 
