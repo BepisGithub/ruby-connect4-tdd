@@ -58,6 +58,17 @@ class LinkedList
     end
     counter
   end
+
+  def traverse
+    nodes = []
+    traversing = @head
+    nodes.push(traversing)
+    until traversing.next_node.nil?
+      traversing = traversing.next_node
+      nodes.push(traversing)
+    end
+    nodes
+  end
 end
 
 class PositionNode
@@ -94,6 +105,21 @@ class Board
     horizontal_node_number.times do |i|
       vertical_node_number.times do |j|
         @graph.list.append(LinkedNode.new(PositionNode.new([i + 1, j + 1])))
+      end
+    end
+  end
+
+  def display
+    puts ''
+    nodes = @graph.list.traverse
+    horizontal = 1
+    nodes.each do |linked_node|
+      if linked_node.data.position[0] == horizontal
+        print linked_node.data.position.to_s
+      else
+        print "\n"
+        print linked_node.data.position.to_s
+        horizontal = linked_node.data.position[0]
       end
     end
   end
