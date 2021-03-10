@@ -89,9 +89,15 @@ describe LinkedList do
       expect(list.size).to eql(0)
     end
     it 'returns 1 when the list only has the head' do
-      head = LinkedNode.new('hey')
+      head = LinkedNode.new('head')
       list = LinkedList.new(head)
       expect(list.size).to eql(1)
+    end
+
+    it 'returns 2 when the list has two nodes' do
+      head = LinkedNode.new('one', LinkedNode.new('two'))
+      list = LinkedList.new(head)
+      expect(list.size).to eql(2)
     end
   end
 end
