@@ -130,6 +130,13 @@ describe PositionNode do
   end
 end
 
+describe Board do
+  describe 'the data it holds' do
+    it 'holds a linked list that is 7 by 6 nodes long' do
+
+    end
+  end
+end
 
 
 # describe Board do
