@@ -303,5 +303,14 @@ describe Board do
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.vertical_won?(occupied_nodes)).to eql([symbol])
     end
+    it 'returns false if there is no vertical winner' do
+      board = Board.new
+      symbol = 'o'
+      3.times do 
+        board.occupy(1, symbol)
+      end
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.vertical_won?(occupied_nodes)).to be false
+    end
   end
 end
