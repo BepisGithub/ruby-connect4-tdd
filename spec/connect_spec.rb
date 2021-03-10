@@ -48,6 +48,13 @@ describe LinkedList do
       list.append(tail)
       expect(list.tail).to equal(tail)
     end
+    it 'correctly assigns the tail pointer when appending a node with next node(s)' do
+      head = LinkedNode.new('head')
+      list = LinkedList.new(head)
+      mid = LinkedNode.new('mid',LinkedNode.new('tail'))
+      list.append(mid)
+      expect(list.tail.data).to eq('tail')
+    end
   end
 end
 
