@@ -141,9 +141,15 @@ end
 
 describe Board do
   describe 'the data it holds' do
-    it 'holds a graph' do
-      board = Board.new
-      expect(board.graph.is_a?(Graph)).to be true
+    describe 'the graph it holds'
+      it 'holds a graph' do
+        board = Board.new
+        expect(board.graph.is_a?(Graph)).to be true
+      end
+      it 'holds (7 by 6) 42 nodes in total' do
+        board = Board.new
+        expect(board.graph.root.size).to eql(42)
+      end
     end
   end
 end
