@@ -68,6 +68,10 @@ describe LinkedList do
     end
   end
   describe '#find' do
+    it 'returns nil when the head is nil' do
+      list = LinkedList.new
+      expect(list.find('not present')).to be nil
+    end
     it 'finds a node with a passed value' do
       new_node = LinkedNode.new('A', LinkedNode.new('B', LinkedNode.new('C', LinkedNode.new('D'))))
       list = LinkedList.new(new_node)
