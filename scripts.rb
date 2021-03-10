@@ -148,9 +148,17 @@ class Board
     node_to_occupy.data.occupant = [symbol]
   end
 
-  def horizontal_won?
+  # def horizontal_won?(nodes_array)
+  #   # check each row at a time
+  #   rows = {}
+  #   6.times do |i|
+  #     rows[i + 1] = nodes_array.select { |node| node.data.position[1] == (i + 1)}
+  #   end
+  #   rows.each do |row, nodes_on_row|
+  #     next if nodes_on_row.size < 4
 
-  end
+  #   end
+  # end
 
   def won?
     occupied_nodes = @graph.list.occupied_nodes
@@ -169,6 +177,7 @@ class Board
       end
     end
     return false if first_player_nodes.size < 4 && second_player_nodes.size < 4
+
 
   end
 end

@@ -184,6 +184,16 @@ describe Board do
       end
     end
   end
+  describe '#populate_adjacency_list' do
+    it 'traverses the board to find occupied nodes then fills in the adjacency list of the occupied nodes' do
+      board = Board.new
+      board.occupy(1, 'o')
+      board.occupy(2, 'o')
+      board.populate_adjacency_list
+      occupied_nodes = board.list.occupied_nodes
+      expect(occupied_nodes[0].data.adjacency_list.head.data).to eql(occupied_nodes[1].data.position)
+    end
+  end
   describe '#display' do
     it 'displays the graph in a format the users can visualise' do
       board = Board.new
@@ -230,7 +240,7 @@ describe Board do
     end
   end
   describe '#horizontal_won?' do
-    it 'takes an array of nodes and returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
+    xit 'takes an array of nodes and returns the symbol (a truthy value) of the winner if there is a horizontal winner' do
       board = Board.new
       symbol = 'o'
       4.times do |i|
