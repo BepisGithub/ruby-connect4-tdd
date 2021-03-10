@@ -209,6 +209,7 @@ class Board
   end
 
   def horizontal_won?(nodes_array)
+    return false if nodes_array.empty?
     # check each row at a time
     symbol = nodes_array[0].data.occupant
     counter = 0
