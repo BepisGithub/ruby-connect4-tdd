@@ -80,7 +80,7 @@ describe LinkedList do
     it 'returns nil when the passed value is not present' do
       new_node = LinkedNode.new('A', LinkedNode.new('B', LinkedNode.new('C', LinkedNode.new('D'))))
       list = LinkedList.new(new_node)
-      expect((list.find('E')).data).to be nil
+      expect((list.find('E'))).to be nil
     end
   end
 end
