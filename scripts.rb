@@ -78,7 +78,7 @@ class PositionNode
     @position = position
     @adjacency_list = adjacency_list
     @adjacency_list = LinkedList.new unless adjacency_list.is_a? LinkedList
-    @occupant = ' '
+    @occupant = [' ']
   end
 end
 
@@ -111,14 +111,15 @@ class Board
 
   def display
     puts ''
+    puts '------------------------------'
     nodes = @graph.list.traverse
     horizontal = 1
     nodes.each do |linked_node|
       if linked_node.data.position[0] == horizontal
-        print linked_node.data.position.to_s # TODO: Change this to display the occupant
+        print linked_node.data.occupant.to_s # TODO: Change this to display the occupant
       else
         print "\n"
-        print linked_node.data.position.to_s # TODO: Change this to display the occupant
+        print linked_node.data.occupant.to_s # TODO: Change this to display the occupant
         horizontal = linked_node.data.position[0]
       end
     end
@@ -128,8 +129,8 @@ class Board
     nodes = @graph.list.traverse
     node_to_occupy = nil
     nodes.each do |node|
-      node_to_occupy = node if node.data.position[1] == column && node.data.occupant == ' '
+      node_to_occupy = node if node.data.position[1] == column && node.data.occupant == [' ']
     end
-    node_to_occupy.data.occupant = symbol
+    node_to_occupy.data.occupant = [symbol]
   end
 end

@@ -181,7 +181,8 @@ describe Board do
       nodes.each do |node|
         node_to_occupy = node if node.data.position[1] == column
       end
-      expect(node_to_occupy.data.occupant).to eql('o')
+      board.display
+      expect(node_to_occupy.data.occupant).to eql(['o'])
     end
   end
 end
