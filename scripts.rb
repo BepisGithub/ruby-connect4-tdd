@@ -71,6 +71,7 @@ class LinkedList
   end
 
   def occupied_nodes
+    return [] if @head.nil?
     nodes = traverse
     nodes.reject! { |node| node.data.occupant == [' '] }
     nodes
@@ -152,6 +153,19 @@ class Board
   end
 
   def won?
-
+    occupied_nodes = @graph.list.occupied_nodes
+    first_player_symbol = occupied_nodes[0].data.occupant
+    first_player_nodes = []
+    second_player_symbol = nil
+    second_player_nodes = []
+    occupied_nodes.each do |node|
+      if node.data.occupant == first_player_symbol
+        first_player_nodes.push(node)
+      else
+        second_player_symbol = node.data.occupant if second_player_symbol.nil?
+        second_player_nodes.push(node)
+      end
+    end
+    first_player_nodes
   end
 end

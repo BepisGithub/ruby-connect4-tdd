@@ -226,7 +226,9 @@ describe Board do
           board = Board.new
           board.occupy(1, 'o')
           board.occupy(2, 'x')
-          # expect(board.won?).to eq('ar')
+        end
+        it 'returns false if the number of occupied nodes for both players are less than four' do
+          
         end
       end
     end
