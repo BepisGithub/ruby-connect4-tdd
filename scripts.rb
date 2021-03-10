@@ -45,6 +45,10 @@ class LinkedList
       next_node = next_node.next_node
     end
   end
+
+  def size
+    return 0 if @head.nil?
+  end
 end
 
 class PositionNode
