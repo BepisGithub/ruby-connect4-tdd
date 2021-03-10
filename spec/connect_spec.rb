@@ -263,17 +263,19 @@ describe Board do
     end
     it 'returns false if there are four horizontal pieces but not in a row' do
       board = Board.new
-      board.display
-
       board.occupy(1, 'o')
       board.occupy(3, 'o')
       board.occupy(5, 'o')
       board.occupy(7, 'o')
-      
       occupied_nodes = board.graph.list.occupied_nodes
-      board.display
-
       expect(board.horizontal_won?(occupied_nodes)).to be false
+    end
+    it 'returns false if there are three horizontal pieces in a row then a fourth not in a row' do
+      board = Board.new
+      board.occupy(1, 'o')
+      board.occupy(2, 'o')
+      board.occupy(3, 'o')
+      board.occupy(5, 'o')
     end
   end
 end
