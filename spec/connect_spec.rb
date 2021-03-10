@@ -127,6 +127,11 @@ describe PositionNode do
       new_node = PositionNode.new('position', 'false list')
       expect((new_node.adjacency_list).is_a? LinkedList).to be true
     end
+    it 'holds the symbol occupying the node' do
+      new_node = PositionNode.new('position')
+      new_node.occupant = 'B'
+      expect(new_node.occupant).to eq('B')
+    end
   end
 end
 
@@ -155,7 +160,7 @@ describe Board do
         head = board.graph.list.head
         tail = board.graph.list.tail
         expect(head.data.position).to eql([1, 1])
-        expect(tail.data.position).to eql([7, 6]) 
+        expect(tail.data.position).to eql([7, 6])
       end
     end
   end
