@@ -22,10 +22,22 @@ describe LinkedList do
       list = LinkedList.new(head)
       expect(list.head).to be_truthy
     end
-    it 'holds a tail pointer' do
-      new_node = LinkedNode.new('hey', LinkedNode.new('my guy'))
-      list = LinkedList.new(new_node)
-      expect(list.tail).to be_truthy
+    describe 'the tail pointer' do
+      it 'holds a tail pointer' do
+        new_node = LinkedNode.new('hey', LinkedNode.new('my guy'))
+        list = LinkedList.new(new_node)
+        expect(list.tail).to be_truthy
+      end
+      it 'correctly assigns the tail pointer when a node with many next nodes is passed in' do
+        new_node = LinkedNode.new('hey', LinkedNode.new('my guy', LinkedNode.new('my guy', LinkedNode.new('tail'))))
+        list = LinkedList.new(new_node)
+        expect(list.tail.data).to eq('tail')
+      end
+      it 'makes the tail the head when a list with only one node is created' do
+        new_node = LinkedNode.new('head')
+        list = LinkedList.new(new_node)
+        expect(list.head).to equal(list.tail)
+      end
     end
   end
 end
