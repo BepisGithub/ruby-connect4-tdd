@@ -22,9 +22,13 @@ class LinkedList
   end
 
   def append(node)
-    @tail.next_node = node
-    until @tail.next_node.nil?
-      @tail = @tail.next_node
+    if @head.nil?
+      @head = node
+    else
+      @tail.next_node = node
+      until @tail.next_node.nil?
+        @tail = @tail.next_node
+      end
     end
   end
 

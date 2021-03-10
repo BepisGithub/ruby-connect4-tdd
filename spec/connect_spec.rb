@@ -46,6 +46,12 @@ describe LinkedList do
     end
   end
   describe '#append' do
+    it 'works with a nil head' do
+      list = LinkedList.new
+      new_node = LinkedNode.new('head')
+      list.append(new_node)
+      expect(list.head.data).to eq('head')
+    end
     it 'adds a node to the end of the list' do
       head = LinkedNode.new('head')
       list = LinkedList.new(head)
