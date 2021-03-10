@@ -159,8 +159,8 @@ describe Board do
         board = Board.new
         head = board.graph.list.head
         tail = board.graph.list.tail
-        expect(head.data.position).to eql([1, 1])
-        expect(tail.data.position).to eql([7, 6])
+        expect(head.data.position).to eql([1, 6])
+        expect(tail.data.position).to eql([7, 1])
       end
     end
   end
