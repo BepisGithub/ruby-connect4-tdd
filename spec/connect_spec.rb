@@ -249,5 +249,9 @@ describe Board do
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.horizontal_won?(occupied_nodes)).to eql([symbol])
     end
+    it 'returns false if an empty array is passed' do
+      board = Board.new
+      expect(board.horizontal_won?([])).to be false
+    end
   end
 end
