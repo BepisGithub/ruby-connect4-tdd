@@ -83,6 +83,12 @@ describe LinkedList do
       expect((list.find('E'))).to be nil
     end
   end
+  describe '#size' do
+    it 'returns 0 when the list is empty' do
+      list = LinkedList.new
+      expect(list.size).to eql(0)
+    end
+  end
 end
 
 describe PositionNode do
