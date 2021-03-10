@@ -16,6 +16,11 @@ describe LinkedNode do
 end
 
 describe LinkedList do
+  describe '#initialize' do
+    it 'can be initialized without any arguments' do
+      list = LinkedList.new
+    end
+  end
   describe 'the data it holds' do
     it 'holds a head pointer' do
       head = LinkedNode.new('head')
