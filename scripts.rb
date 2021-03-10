@@ -102,9 +102,15 @@ class Board
   def populate_graph
     horizontal_node_number = 7
     vertical_node_number = 6
-    horizontal_node_number.times do |i|
-      vertical_node_number.times do |j|
-        @graph.list.append(LinkedNode.new(PositionNode.new([i + 1, j + 1])))
+    # horizontal_node_number.times do |i|
+    #   vertical_node_number.times do |j|
+    #     @graph.list.append(LinkedNode.new(PositionNode.new([i + 1, j + 1])))
+    #   end
+    # end
+
+    vertical_node_number.downto(1) do |i|
+      horizontal_node_number.times do |j|
+        @graph.list.append(LinkedNode.new(PositionNode.new([j + 1, i])))
       end
     end
   end
@@ -113,14 +119,15 @@ class Board
     puts ''
     puts '------------------------------'
     nodes = @graph.list.traverse
-    horizontal = 1
+    # nodes.reverse!
+    vertical = 6
     nodes.each do |linked_node|
-      if linked_node.data.position[0] == horizontal
-        print linked_node.data.occupant.to_s
+      if linked_node.data.position[1] == vertical
+        print linked_node.data.position.to_s
       else
         print "\n"
-        print linked_node.data.occupant.to_s
-        horizontal = linked_node.data.position[0]
+        print linked_node.data.position.to_s
+        vertical = linked_node.data.position[1]
       end
     end
   end
