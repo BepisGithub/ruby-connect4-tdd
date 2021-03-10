@@ -76,6 +76,11 @@ class LinkedList
     nodes.reject! { |node| node.data.occupant == [' '] }
     nodes
   end
+
+  def empty?
+    return true if @head.nil?
+    false
+  end
 end
 
 class PositionNode
@@ -200,19 +205,32 @@ class Board
       node_to_occupy = node if node.data.position[0] == column && node.data.occupant == [' ']
     end
     node_to_occupy.data.occupant = [symbol]
+    populate_adjacency_list
   end
 
-  # def horizontal_won?(nodes_array)
-  #   # check each row at a time
-  #   rows = {}
-  #   6.times do |i|
-  #     rows[i + 1] = nodes_array.select { |node| node.data.position[1] == (i + 1)}
-  #   end
-  #   rows.each do |row, nodes_on_row|
-  #     next if nodes_on_row.size < 4
-
-  #   end
-  # end
+  def horizontal_won?(nodes_array)
+    # check each row at a time
+    symbol = nodes_array[0].data.occupant
+    counter = 0
+    rows = {}
+    6.times do |i|
+      rows[i + 1] = nodes_array.select { |node| node.data.position[1] == (i + 1) }
+    end
+    rows.each do |row_number, nodes_on_row|
+      next if nodes_on_row.size < 4
+      counter = 0
+      nodes_on_row.each do |node|
+        next if node.data.adjacency_list.empty?
+        adjacent_nodes = node.data.adjacency_list.traverse
+        y_coord = node.data.position[1]
+        horizontal_adjacent_nodes = adjacent_nodes.select { |node| node.data[1] == y_coord }
+        next if horizontal_adjacent_nodes.empty?
+        counter += 1
+      end
+    end
+    return symbol if counter == 4
+    false
+  end
 
   def won?
     occupied_nodes = @graph.list.occupied_nodes
