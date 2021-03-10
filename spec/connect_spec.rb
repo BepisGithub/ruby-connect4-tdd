@@ -171,16 +171,15 @@ describe Board do
     end
   end
   describe '#occupy' do
-    it 'takes a symbol and occupies a slot' do
+    it 'takes a symbol, a column and occupies a slot' do
       board = Board.new
-      horizontal = 1
-      vertical = 1
+      column = 1
       symbol = 'o'
-      board.occupy(horizontal, vertical, symbol)
+      board.occupy(column, symbol)
       node_to_occupy = nil
       nodes = board.graph.list.traverse
       nodes.each do |node|
-        node_to_occupy = node if node.data.position == [horizontal, vertical]
+        node_to_occupy = node if node.data.position[1] == column
       end
       expect(node_to_occupy.data.occupant).to eql('o')
     end
