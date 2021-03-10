@@ -141,7 +141,7 @@ end
 
 describe Board do
   describe 'the data it holds' do
-    describe 'the graph it holds'
+    describe 'the graph it holds' do
       it 'holds a graph' do
         board = Board.new
         expect(board.graph.is_a?(Graph)).to be true
