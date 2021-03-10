@@ -139,14 +139,14 @@ describe Graph do
   end
 end
 
-# describe Board do
-#   describe 'the data it holds' do
-#     it 'holds a graph which holds a linked list that is 7 by 6 nodes long' do
-#       board = Board.new
-
-#     end
-#   end
-# end
+describe Board do
+  describe 'the data it holds' do
+    it 'holds a graph' do
+      board = Board.new
+      expect(board.graph.is_a? Graph)to be true
+    end
+  end
+end
 
 
 # describe Board do
