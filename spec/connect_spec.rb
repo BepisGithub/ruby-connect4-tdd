@@ -150,6 +150,13 @@ describe Board do
         board = Board.new
         expect(board.graph.list.size).to eql(42)
       end
+      it '(the board) is 7 nodes horizontally and 6 nodes vertically' do
+        board = Board.new
+        head = board.graph.list.head
+        tail = board.graph.list.tail
+        expect(head.data.position).to eql([1, 1])
+        expect(tail.data.position).to eql([7, 6]) 
+      end
     end
   end
 end
