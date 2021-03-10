@@ -48,9 +48,11 @@ class LinkedList
 end
 
 class PositionNode
-  attr_accessor :position
+  attr_accessor :position, :adjacency_list
 
-  def initialize(position)
+  def initialize(position, adjacency_list = LinkedList.new)
     @position = position
+    @adjacency_list = adjacency_list
+    @adjacency_list = LinkedList.new unless adjacency_list.is_a? LinkedList
   end
 end
