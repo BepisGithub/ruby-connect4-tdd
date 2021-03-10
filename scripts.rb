@@ -71,8 +71,16 @@ end
 class Graph
   attr_accessor :root
 
-  def initialize 
+  def initialize
     @root = LinkedList.new
   end
 
+end
+
+class Board
+  attr_accessor :graph
+
+  def initialize
+    @graph = Graph.new
+  end
 end

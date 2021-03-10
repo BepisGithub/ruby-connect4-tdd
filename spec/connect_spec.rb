@@ -143,7 +143,7 @@ describe Board do
   describe 'the data it holds' do
     it 'holds a graph' do
       board = Board.new
-      expect(board.graph.is_a? Graph).to be true
+      expect(board.graph.is_a?(Graph)).to be true
     end
   end
 end
