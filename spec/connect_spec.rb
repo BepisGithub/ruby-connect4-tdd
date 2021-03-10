@@ -15,6 +15,21 @@ describe LinkedNode do
   end
 end
 
+describe LinkedList do
+  describe 'the data it holds' do
+    it 'holds a head pointer' do
+      head = LinkedNode.new('head')
+      list = LinkedList.new(head)
+      expect(list.head).to be_truthy
+    end
+    it 'holds a tail pointer' do
+      new_node = LinkedNode.new('hey', LinkedNode.new('my guy'))
+      list = LinkedList.new(new_node)
+      expect(list.tail).to be_truthy
+    end
+  end
+end
+
 
 
 # describe Board do

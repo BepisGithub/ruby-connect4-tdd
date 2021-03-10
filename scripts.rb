@@ -7,3 +7,16 @@ class LinkedNode
   end
 
 end
+
+class LinkedList
+  attr_accessor :head, :tail
+
+  def initialize(head)
+    @head = head
+    @tail = @head
+    until @tail.next_node.nil?
+      @tail = @tail.next_node
+    end
+  end
+
+end
