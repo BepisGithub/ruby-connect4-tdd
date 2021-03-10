@@ -177,8 +177,12 @@ describe Board do
       vertical = 1
       symbol = 'o'
       board.occupy(horizontal, vertical, symbol)
-      occupied = board.find([horizontal, vertical])
-      expect(occupied.occupant).to eql('o')
+      node_to_occupy = nil
+      nodes = board.graph.list.traverse
+      nodes.each do |node|
+        node_to_occupy = node if node.data.position == [horizontal, vertical]
+      end
+      expect(node_to_occupy.data.occupant).to eql('o')
     end
   end
 end
