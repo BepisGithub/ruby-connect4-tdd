@@ -190,7 +190,7 @@ describe Board do
       board.occupy(1, 'o')
       board.occupy(2, 'o')
       board.populate_adjacency_list
-      occupied_nodes = board.list.occupied_nodes
+      occupied_nodes = board.graph.list.occupied_nodes
       expect(occupied_nodes[0].data.adjacency_list.head.data).to eql(occupied_nodes[1].data.position)
     end
   end

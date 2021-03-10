@@ -122,6 +122,60 @@ class Board
     end
   end
 
+  def populate_adjacency_list
+    occupied_nodes = @graph.list.occupied_nodes
+    occupied_nodes.each do |node|
+      # each node here is a linked node holding a position node
+      # the position node must have its adjacency list updated
+      # the list will be updated with a linked node holding coords, NOT another position node
+      # the adjacent nodes are the nodes whose coordinates do NOT differ by more than one
+      coords = node.data.position
+      x_coord = coords[0]
+      y_coord = coords[1]
+      # possibilites :
+      # x - 1 y + 0
+      potential_position_array = [x_coord - 1, y_coord]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x + 1 y + 0
+      potential_position_array = [x_coord + 1, y_coord]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x + 0 y - 1
+      potential_position_array = [x_coord, y_coord - 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x + 0 y + 1
+      potential_position_array = [x_coord, y_coord + 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x + 1 y + 1
+      potential_position_array = [x_coord + 1, y_coord + 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x - 1 y - 1
+      potential_position_array = [x_coord - 1, y_coord - 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x + 1 y - 1
+      potential_position_array = [x_coord + 1, y_coord - 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+      # x - 1 y - 1
+      potential_position_array = [x_coord + 1, y_coord - 1]
+      # need to check if this position is present in the occupied nodes
+      present = occupied_nodes.select { |node| node.data.position == potential_position_array}
+      node.data.adjacency_list.append(LinkedNode.new(potential_position_array)) unless present[0].nil?
+    end
+  end
+
   def display
     puts ''
     puts '------------------------------'
