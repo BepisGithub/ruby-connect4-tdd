@@ -11,11 +11,13 @@ end
 class LinkedList
   attr_accessor :head, :tail
 
-  def initialize(head)
+  def initialize(head = nil)
     @head = head
-    @tail = @head
-    until @tail.next_node.nil?
-      @tail = @tail.next_node
+    unless head.nil?
+      @tail = @head
+      until @tail.next_node.nil?
+        @tail = @tail.next_node
+      end
     end
   end
 
