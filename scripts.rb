@@ -13,6 +13,7 @@ class LinkedList
 
   def initialize(head = nil)
     @head = head
+    @tail = nil
     unless head.nil?
       @tail = @head
       until @tail.next_node.nil?
@@ -24,6 +25,7 @@ class LinkedList
   def append(node)
     if @head.nil?
       @head = node
+      @tail = @head
     else
       @tail.next_node = node
       until @tail.next_node.nil?
@@ -82,5 +84,16 @@ class Board
 
   def initialize
     @graph = Graph.new
+    populate_graph
+  end
+
+  def populate_graph
+    horizontal_node_number = 7
+    vertical_node_number = 6
+    horizontal_node_number.times do |i|
+      vertical_node_number.times do |j|
+        @graph.list.append(LinkedNode.new(PositionNode.new([i + 1, j + 1])))
+      end
+    end
   end
 end
