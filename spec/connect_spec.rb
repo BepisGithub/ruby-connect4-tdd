@@ -88,6 +88,11 @@ describe LinkedList do
       list = LinkedList.new
       expect(list.size).to eql(0)
     end
+    it 'returns 1 when the list only has the head' do
+      head = LinkedNode.new('hey')
+      list = LinkedList.new(head)
+      expect(list.size).to eql(1)
+    end
   end
 end
 
