@@ -69,10 +69,10 @@ class PositionNode
 end
 
 class Graph
-  attr_accessor :root
+  attr_accessor :list
 
   def initialize
-    @root = LinkedList.new
+    @list = LinkedList.new
   end
 
 end

@@ -132,9 +132,9 @@ end
 
 describe Graph do
   describe 'the data it holds' do
-    it 'holds a linked list as the root' do
+    it 'holds a linked list as the list' do
       graph = Graph.new
-      expect(graph.root.is_a? LinkedList).to be true
+      expect(graph.list.is_a? LinkedList).to be true
     end
   end
 end
@@ -148,7 +148,7 @@ describe Board do
       end
       it 'holds (7 by 6) 42 nodes in total' do
         board = Board.new
-        expect(board.graph.root.size).to eql(42)
+        expect(board.graph.list.size).to eql(42)
       end
     end
   end
