@@ -104,10 +104,10 @@ describe LinkedList do
       list = LinkedList.new(head)
       expect(list.size).to eql(3)
     end
-    xit 'returns 4 when the list has four nodes' do
-      head = LinkedNode.new('one', LinkedNode.new('two'))
+    it 'returns 4 when the list has four nodes' do
+      head = LinkedNode.new('one', LinkedNode.new('two', LinkedNode.new('three', LinkedNode.new('four'))))
       list = LinkedList.new(head)
-      expect(list.size).to eql(2)
+      expect(list.size).to eql(4)
     end
   end
 end
