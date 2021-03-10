@@ -40,6 +40,15 @@ describe LinkedList do
       end
     end
   end
+  describe '#append' do
+    it 'adds a node to the end of the list' do
+      head = LinkedNode.new('head')
+      list = LinkedList.new(head)
+      tail = LinkedNode.new('tail')
+      list.append(tail)
+      expect(list.tail).to equal(tail)
+    end
+  end
 end
 
 
