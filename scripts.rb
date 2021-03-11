@@ -268,35 +268,138 @@ class Board
 
   def diagonal_won?(nodes_array)
     return false if nodes_array.empty?
-
     symbol = nodes_array[0].data.occupant
-    counter = 0
-    diagonal_adjacent_nodes = {}
-
-    nodes_array.each do |node|
-      next if node.data.adjacency_list.empty?
-
-      diagonal_adjacent_nodes[node] = []
-      adjacent_nodes = node.data.adjacency_list.traverse
-      x_coord = node.data.position[0]
-      y_coord = node.data.position[1]
-      adjacent_nodes.each do |adj_node|
-        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord + 1]
-        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord + 1]
-        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord - 1]
-        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord - 1]
-      end
-    end
-
-    nodes_array.each do |node|
-      counter = 0 if diagonal_adjacent_nodes[node].nil?
-      next if diagonal_adjacent_nodes[node].nil?
-      counter += 1
-    end
-    return symbol if counter > 3
     
-    false
+    
 
+
+
+
+
+
+
+
+
+
+
+    # return false if nodes_array.empty?
+
+    # symbol = nodes_array[0].data.occupant
+    # counter = 0
+    # top_right_adjacent_nodes = {}
+    # top_left_adjacent_nodes = {}
+    # bottom_right_adjacent_nodes = {}
+    # bottom_left_adjacent_nodes = {}
+
+
+    # nodes_array.each do |node|
+    #   next if node.data.adjacency_list.empty?
+
+    #   top_right_adjacent_nodes[node] = []
+    #   top_left_adjacent_nodes[node] = []
+    #   bottom_right_adjacent_nodes[node] = []
+    #   bottom_left_adjacent_nodes[node] = []
+
+    #   adjacent_nodes = node.data.adjacency_list.traverse
+    #   x_coord = node.data.position[0]
+    #   y_coord = node.data.position[1]
+    #   adjacent_nodes.each do |adj_node|
+    #     top_left_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord + 1]
+    #     top_right_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord + 1]
+    #     bottom_right_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord - 1]
+    #     bottom_left_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord - 1]
+    #   end
+    # end
+
+    # nodes_array.each do |node|
+    #   # possibilites are
+    #   # node has NO adjacent nodes -> next (done)
+    #   # node has ONE adjacent node -> follow along that direction ONLY -> return the symbol once the counter hits 4
+    #   # node has MORE THAN ONE adjacent node -> follow along each -> if at any point the counter hits 4 then return the symbol
+    #   directions = 0
+    #   directions += 1 unless top_right_adjacent_nodes[node].nil?
+    #   directions += 1 unless top_left_adjacent_nodes[node].nil?
+    #   directions += 1 unless bottom_right_adjacent_nodes[node].nil?
+    #   directions += 1 unless bottom_left_adjacent_nodes[node].nil?
+
+    #   counter = 0 # if directions.zero?
+    #   next if directions.zero?
+
+    #   if directions == 1
+    #     # follow along the direction
+    #     if top_right_adjacent_nodes[node]
+    #       counter += 1
+    #       top_right = top_right_adjacent_nodes[node]
+    #       while top_right_adjacent_nodes[top_right]
+    #         top_right = top_right_adjacent_nodes[top_right]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif top_left_adjacent_nodes[node]
+    #       counter += 1
+    #       top_left = top_left_adjacent_nodes[node]
+    #       while top_left_adjacent_nodes[top_left]
+    #         top_left = top_left_adjacent_nodes[top_left]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif bottom_right_adjacent_nodes[node]
+    #       counter += 1
+    #       bottom_right = bottom_right_adjacent_nodes[node]
+    #       while bottom_right_adjacent_nodes[bottom_right]
+    #         bottom_right = bottom_right_adjacent_nodes[bottom_right]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif bottom_left_adjacent_nodes[node]
+    #       counter += 1
+    #       bottom_left = bottom_left_adjacent_nodes[node]
+    #       while bottom_left_adjacent_nodes[bottom_left]
+    #         bottom_left = bottom_left_adjacent_nodes[bottom_left]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     end
+    #   else
+    #     if top_right_adjacent_nodes[node]
+    #       counter += 1
+    #       top_right = top_right_adjacent_nodes[node]
+    #       while top_right_adjacent_nodes[top_right]
+    #         top_right = top_right_adjacent_nodes[top_right]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif top_left_adjacent_nodes[node]
+    #       counter += 1
+    #       top_left = top_left_adjacent_nodes[node]
+    #       while top_left_adjacent_nodes[top_left]
+    #         top_left = top_left_adjacent_nodes[top_left]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif bottom_right_adjacent_nodes[node]
+    #       counter += 1
+    #       bottom_right = bottom_right_adjacent_nodes[node]
+    #       while bottom_right_adjacent_nodes[bottom_right]
+    #         bottom_right = bottom_right_adjacent_nodes[bottom_right]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     elsif bottom_left_adjacent_nodes[node]
+    #       counter += 1
+    #       bottom_left = bottom_left_adjacent_nodes[node]
+    #       while bottom_left_adjacent_nodes[bottom_left]
+    #         bottom_left = bottom_left_adjacent_nodes[bottom_left]
+    #         counter += 1
+    #       end
+    #       return symbol if counter > 3
+    #     end
+    #   end
+    #   counter += 1
+    # end
+    # return symbol if counter > 3
+
+    # false
   end
 
   def won?
