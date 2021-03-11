@@ -323,7 +323,7 @@ describe Board do
     end
   end
   describe '#diagonal_won?' do
-    it 'takes an array of nodes and returns the symbol (a truthy value) of the winner if there is a vertical winner' do
+    it 'takes an array of nodes and returns the symbol (a truthy value) of the winner if there is a diagonal winner' do
       board = Board.new
       symbol = 'o'
       board.occupy(1, symbol)
@@ -338,6 +338,13 @@ describe Board do
       end
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to be_truthy
+    end
+    it 'returns false if there is no diagonal 4 in a row' do
+      board = Board.new
+      symbol = 'o'
+      board.occupy(1, symbol)
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.diagonal_won?(occupied_nodes)).to be false
     end
   end
 end
