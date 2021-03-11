@@ -1,3 +1,5 @@
+require 'pry'
+
 class LinkedNode
   attr_accessor :data, :next_node
 
@@ -269,47 +271,84 @@ class Board
   def diagonal_won?(nodes_array)
     return false if nodes_array.empty?
     symbol = nodes_array[0].data.occupant
-    
-    
+    counter = 0
+    top_right_adjacent_nodes = {}
+    top_left_adjacent_nodes = {}
+    bottom_right_adjacent_nodes = {}
+    bottom_left_adjacent_nodes = {}
 
 
+    nodes_array.each do |node|
+      next if node.data.adjacency_list.empty?
 
+      adjacent_nodes = node.data.adjacency_list.traverse
+      x_coord = node.data.position[0]
+      y_coord = node.data.position[1]
+      adjacent_nodes.each do |adj_node|
+        # some adjacent nodes are constantly being reevaluated by this method
+        # include some sort of check to not recheck already done nodes
 
+        top_left_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord - 1, y_coord + 1]
+        top_right_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord + 1, y_coord + 1]
+        bottom_right_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord + 1, y_coord - 1]
+        bottom_left_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord - 1, y_coord - 1]
+      end
 
+    end
 
+    nodes_array.each do |node|
+      if top_right_adjacent_nodes[node]
+        counter = 1
+        top_right = top_right_adjacent_nodes[node]
+        counter += 1
+        until top_right.nil?
+          # THE ISSUE LIES IN MAKING THE TOP RIGHT A LINKED ADJ NODE
+          # BUT THE HASHES CONTAIN THE LINKED POSITION NODES AS THE KEY
+          # we need to find the linked position node with the corresponding value
+          top_right = nodes_array.select { |node| node.data.position == top_right.data}
+          top_right = top_right[0]
+          top_right = top_right_adjacent_nodes[top_right]
+          counter += 1 unless top_right.nil?
+        end
+        return symbol if counter > 3
+      elsif top_left_adjacent_nodes[node]
+        counter = 1
+        top_left = top_left_adjacent_nodes[node]
+        counter += 1
+        until top_left.nil?
+          top_left = nodes_array.select { |node| node.data.position == top_left.data }
+          top_left = top_left[0]
+          top_left = top_left_adjacent_nodes[top_left]
+          counter += 1 unless top_left.nil?
+        end
+        return symbol if counter > 3
+      elsif bottom_right_adjacent_nodes[node]
+        counter = 1
+        bottom_right = bottom_right_adjacent_nodes[node]
+        counter += 1
+        until bottom_right.nil?
+          bottom_right = nodes_array.select { |node| node.data.position == bottom_right.data }
+          bottom_right = bottom_right[0]
+          bottom_right = bottom_right_adjacent_nodes[bottom_right]
+          counter += 1 unless bottom_right.nil?
+        end
+        return symbol if counter > 3
+        
+      elsif bottom_left_adjacent_nodes[node]
+        counter = 1
+        bottom_left = bottom_left_adjacent_nodes[node]
+        counter += 1
+        until bottom_left.nil?
+          bottom_left = nodes_array.select { |node| node.data.position == bottom_left.data }
+          bottom_left = bottom_left[0]
+          bottom_left = bottom_left_adjacent_nodes[bottom_left]
+          counter += 1 unless bottom_left.nil?
+        end
+        return symbol if counter > 3
+      end
+    end
 
-
-
-
-
-    # return false if nodes_array.empty?
-
-    # symbol = nodes_array[0].data.occupant
-    # counter = 0
-    # top_right_adjacent_nodes = {}
-    # top_left_adjacent_nodes = {}
-    # bottom_right_adjacent_nodes = {}
-    # bottom_left_adjacent_nodes = {}
-
-
-    # nodes_array.each do |node|
-    #   next if node.data.adjacency_list.empty?
-
-    #   top_right_adjacent_nodes[node] = []
-    #   top_left_adjacent_nodes[node] = []
-    #   bottom_right_adjacent_nodes[node] = []
-    #   bottom_left_adjacent_nodes[node] = []
-
-    #   adjacent_nodes = node.data.adjacency_list.traverse
-    #   x_coord = node.data.position[0]
-    #   y_coord = node.data.position[1]
-    #   adjacent_nodes.each do |adj_node|
-    #     top_left_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord + 1]
-    #     top_right_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord + 1]
-    #     bottom_right_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord - 1]
-    #     bottom_left_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord - 1]
-    #   end
-    # end
+    false
 
     # nodes_array.each do |node|
     #   # possibilites are
