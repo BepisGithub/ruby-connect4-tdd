@@ -424,5 +424,9 @@ describe Player do
       player = Player.new('name')
       expect(player.active).to be false
     end
+    it 'holds a symbol' do
+      player = Player.new('name')
+      expect(player.symbol).to be_truthy
+    end
   end
 end
