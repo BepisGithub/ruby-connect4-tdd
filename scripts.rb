@@ -219,22 +219,27 @@ class Board
     end
     rows.each do |row_number, nodes_on_row|
       next if nodes_on_row.size < 4
+
       counter = 0
       nodes_on_row.each do |node|
         next if node.data.adjacency_list.empty?
+
         adjacent_nodes = node.data.adjacency_list.traverse
         y_coord = node.data.position[1]
         horizontal_adjacent_nodes = adjacent_nodes.select { |node| node.data[1] == y_coord }
         next if horizontal_adjacent_nodes.empty?
+
         counter += 1
       end
     end
     return symbol if counter == 4
+
     false
   end
 
   def vertical_won?(nodes_array)
     return false if nodes_array.empty?
+
     symbol = nodes_array[0].data.occupant
     counter = 0
     columns = {}
@@ -243,17 +248,53 @@ class Board
     end
     columns.each do |column_number, nodes_on_column|
       next if nodes_on_column.size < 4
+
       counter = 0
       nodes_on_column.each do |node|
         next if node.data.adjacency_list.empty?
+
         adjacent_nodes = node.data.adjacency_list.traverse
         x_coord = node.data.position[0]
         vertical_adjacent_nodes = adjacent_nodes.select { |node| node.data[0] == x_coord }
         next if vertical_adjacent_nodes.empty?
+
         counter += 1
       end
     end
     return symbol if counter == 4
+
+    false
+  end
+
+  def diagonal_won?(nodes_array)
+    return false if nodes_array.empty?
+
+    symbol = nodes_array[0].data.occupant
+    counter = 0
+    diagonal_adjacent_nodes = {}
+
+    nodes_array.each do |node|
+      next if node.data.adjacency_list.empty?
+
+      diagonal_adjacent_nodes[node] = []
+      adjacent_nodes = node.data.adjacency_list.traverse
+      x_coord = node.data.position[0]
+      y_coord = node.data.position[1]
+      adjacent_nodes.each do |adj_node|
+        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord + 1]
+        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord + 1]
+        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord + 1, y_coord - 1]
+        diagonal_adjacent_nodes[node].push(adj_node) if adj_node.data == [x_coord - 1, y_coord - 1]
+      end
+    end
+
+    nodes_array.each do |node|
+      counter = 0 if diagonal_adjacent_nodes[node].nil?
+      next if diagonal_adjacent_nodes[node].nil?
+      counter += 1
+    end
+    return symbol if counter > 3
+    
     false
 
   end
