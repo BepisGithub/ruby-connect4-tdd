@@ -461,16 +461,16 @@ class Board
     end
     return false if first_player_nodes.size < 4 && second_player_nodes.size < 4
 
-
   end
 end
 
 class Player
-  attr_accessor :name, :won, :active
+  attr_accessor :name, :won, :active, :symbol
 
-  def initialize(name)
+  def initialize(name, symbol = 'NIL SYMBOL')
     @name = name
     @won = false
     @active = false
+    @symbol = symbol
   end
 end
