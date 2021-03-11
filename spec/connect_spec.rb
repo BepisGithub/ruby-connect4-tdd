@@ -409,3 +409,12 @@ describe Board do
     end
   end
 end
+
+describe Player do
+  describe 'the data it holds' do
+    it 'holds a name' do
+      player = Player.new('name')
+      expect(player.name).to be_truthy
+    end
+  end
+end

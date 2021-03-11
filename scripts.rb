@@ -207,7 +207,7 @@ class Board
       node_to_occupy = node if node.data.position[0] == column && node.data.occupant == [' ']
     end
     return 'error: column full' if node_to_occupy.nil?
-    
+
     node_to_occupy.data.occupant = [symbol]
     populate_adjacency_list
   end
@@ -462,5 +462,13 @@ class Board
     return false if first_player_nodes.size < 4 && second_player_nodes.size < 4
 
 
+  end
+end
+
+class Player
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
   end
 end
