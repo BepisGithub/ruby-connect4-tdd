@@ -379,5 +379,24 @@ describe Board do
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to eql([symbol])
     end
+    it 'works with 4 pieces together but not diagonally' do
+      board = Board.new
+      symbol = 'o'
+      3.times do 
+        board.occupy(1, symbol)
+      end
+
+      2.times do 
+        board.occupy(2, symbol)
+      end
+
+      3.times do 
+        board.occupy(3, symbol)
+      end
+      
+      board.display
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.diagonal_won?(occupied_nodes)).to be false
+    end
   end
 end
