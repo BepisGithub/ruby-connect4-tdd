@@ -420,5 +420,9 @@ describe Player do
       player = Player.new('name')
       expect(player.won).to be false
     end
+    it 'holds an active value' do
+      player = Player.new('name')
+      expect(player.active).to be false
+    end
   end
 end
