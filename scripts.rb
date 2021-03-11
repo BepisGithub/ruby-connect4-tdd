@@ -206,6 +206,8 @@ class Board
     nodes.each do |node|
       node_to_occupy = node if node.data.position[0] == column && node.data.occupant == [' ']
     end
+    return 'error: column full' if node_to_occupy.nil?
+    
     node_to_occupy.data.occupant = [symbol]
     populate_adjacency_list
   end
