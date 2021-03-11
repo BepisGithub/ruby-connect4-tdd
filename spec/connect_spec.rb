@@ -228,6 +228,15 @@ describe Board do
       board.occupy(column, symbol)
       board.display
     end
+    it 'returns an error when the column is full' do
+      board = Board.new
+      column = 1
+      symbol = 'o'
+      6.times do
+        board.occupy(column, symbol)
+      end
+      expect(board.occupy(column, symbol)).to eql('error: column full')
+    end
   end
   describe '#won?' do
     describe 'checks each occupied slot, then splits them up into two arrays of player 1 and 2' do
