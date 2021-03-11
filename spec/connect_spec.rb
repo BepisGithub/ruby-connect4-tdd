@@ -416,5 +416,9 @@ describe Player do
       player = Player.new('name')
       expect(player.name).to be_truthy
     end
+    it 'holds a won? value' do
+      player = Player.new('name')
+      expect(player.won?).to be false
+    end
   end
 end
