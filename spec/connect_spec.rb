@@ -430,3 +430,12 @@ describe Player do
     end
   end
 end
+
+describe Game do
+  describe '#initialize' do
+    it 'creates a board then it creates two players asking for their names and auto asigning a symbol' do
+      game = Game.new
+      expect(game.board).to be_truthy.and expect(game.player_one).to be_truthy.and expect(game.player_two).to be_truthy
+    end
+  end
+end
