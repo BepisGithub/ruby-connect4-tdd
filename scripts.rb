@@ -466,10 +466,11 @@ class Board
 end
 
 class Player
-  attr_accessor :name, :won
+  attr_accessor :name, :won, :active
 
   def initialize(name)
     @name = name
     @won = false
+    @active = false
   end
 end
