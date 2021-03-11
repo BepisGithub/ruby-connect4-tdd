@@ -474,3 +474,21 @@ class Player
     @symbol = symbol
   end
 end
+
+class Game
+  attr_accessor :player_one, :player_two, :board
+
+  def initialize
+    @board = Board.new
+    puts 'What is the name of player one? :'
+    name_one = gets.strip.chomp.to_s
+    symbol_one = 'o'
+    @player_one = Player.new(name_one, symbol_one)
+    puts 'What is the name of player two? :'
+    name_two = gets.strip.chomp.to_s
+    symbol_two = 'x'
+    @player_two = Player.new(name_two, symbol_two)
+    puts "The symbol of #{@player_one} is #{@player_one.symbol} and the symbol of #{@player_two} is #{@player_two.symbol}"
+  end
+
+end
