@@ -504,6 +504,27 @@ class Game
   def play
     rand_num = rand(1..10)
     rand_num % 2 ? @player_one.active = true : @player_two.active = true
+    active_player = -1
+    result = @board.won?
+    @board.display
+    until result
+      # one of the players is active
+      @player_one.active == true ? active_player = @player_one : active_player = @player_two
+      puts "what is your column choice, #{active_player.name}? the choices are between 1 to 7"
+      column_choice = 'nil'
+      column_choice = gets.strip.chomp.to_i until column_choice.is_a? Integer
+      occupy_attempt = @board.occupy(column_choice, active_player.symbol)
+      occupy_attempt = @board.occupy(column_choice, active_player.symbol) until occupy_attempt != 'error: column full'
+      @board.display
+      result = @board.won?
+      @player_one.active = !(@player_one.active)
+      @player_two.active = !(@player_two.active)
+    end
+    # the game is over and the result variable holds the symbol of the winner
+    winner = -1
+    [@player_one.symbol] == result ? winner = @player_one : winner = @player_two
+    winner.won = true
+    puts "Congratulations, #{winner.name}, your symbol was #{winner.symbol} and you won!"
   end
 
 end
