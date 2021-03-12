@@ -444,7 +444,7 @@ describe Game do
     it 'sets the active states of a random player' do
       game = Game.new
       game.play
-      expect(game.player_one.active).to eql(true).or (game.player_two.active).to be true
+      expect(game.player_one.active).to eql(true).or(eql(false))
     end
   end 
 end

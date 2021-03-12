@@ -491,4 +491,9 @@ class Game
     puts "The symbol of #{@player_one.name} is #{@player_one.symbol} and the symbol of #{@player_two.name} is #{@player_two.symbol}"
   end
 
+  def play
+    rand_num = rand(1..10)
+    rand_num % 2 ? @player_one.active = true : @player_two.active = true
+  end
+
 end
