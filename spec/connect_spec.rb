@@ -226,7 +226,6 @@ describe Board do
       board.occupy(column, symbol)
       board.occupy(column, symbol)
       board.occupy(column, symbol)
-      board.display
     end
     it 'returns an error when the column is full' do
       board = Board.new
