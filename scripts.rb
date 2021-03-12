@@ -353,6 +353,7 @@ class Board
     return false if nodes_array.empty?
     symbol = nodes_array[0].data.occupant
     counter = 0
+    won = false
     top_right_adjacent_nodes = {}
     top_left_adjacent_nodes = {}
     bottom_right_adjacent_nodes = {}
@@ -368,11 +369,14 @@ class Board
       adjacent_nodes.each do |adj_node|
         # some adjacent nodes are constantly being reevaluated by this method
         # include some sort of check to not recheck already done nodes
-
-        top_left_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord - 1, y_coord + 1]
-        top_right_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord + 1, y_coord + 1]
-        bottom_right_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord + 1, y_coord - 1]
-        bottom_left_adjacent_nodes[node] = adj_node if adj_node.data == [x_coord - 1, y_coord - 1]
+        pos_adj_node = nodes_array.select{ |n| n.data.position == adj_node.data }
+        pos_adj_node = pos_adj_node[0]
+        unless pos_adj_node.nil?
+          top_left_adjacent_nodes[node] = pos_adj_node if pos_adj_node.data.position == [x_coord - 1, y_coord + 1]
+          top_right_adjacent_nodes[node] = pos_adj_node if pos_adj_node.data.position == [x_coord + 1, y_coord + 1]
+          bottom_right_adjacent_nodes[node] = pos_adj_node if pos_adj_node.data.position == [x_coord + 1, y_coord - 1]
+          bottom_left_adjacent_nodes[node] = pos_adj_node if pos_adj_node.data.position == [x_coord - 1, y_coord - 1]
+        end
       end
 
     end
@@ -381,57 +385,50 @@ class Board
       if top_right_adjacent_nodes[node]
         counter = 1
         top_right = top_right_adjacent_nodes[node]
-        counter += 1
+        counter += 1 unless top_right.nil?
         until top_right.nil?
-          # THE ISSUE LIES IN MAKING THE TOP RIGHT A LINKED ADJ NODE
-          # BUT THE HASHES CONTAIN THE LINKED POSITION NODES AS THE KEY
-          # we need to find the linked position node with the corresponding value
-          top_right = nodes_array.select { |node| node.data.position == top_right.data}
-          top_right = top_right[0]
           top_right = top_right_adjacent_nodes[top_right]
           counter += 1 unless top_right.nil?
         end
-        return symbol if counter > 3
+        won = symbol if counter > 3
+        break if counter > 3
       end
       if top_left_adjacent_nodes[node]
         counter = 1
         top_left = top_left_adjacent_nodes[node]
-        counter += 1
+        counter += 1 unless top_left.nil?
         until top_left.nil?
-          top_left = nodes_array.select { |node| node.data.position == top_left.data }
-          top_left = top_left[0]
           top_left = top_left_adjacent_nodes[top_left]
           counter += 1 unless top_left.nil?
         end
-        return symbol if counter > 3
+        won = symbol if counter > 3
+        break if counter > 3
       end
       if bottom_right_adjacent_nodes[node]
         counter = 1
         bottom_right = bottom_right_adjacent_nodes[node]
-        counter += 1
+        counter += 1 unless bottom_right.nil?
         until bottom_right.nil?
-          bottom_right = nodes_array.select { |node| node.data.position == bottom_right.data }
-          bottom_right = bottom_right[0]
           bottom_right = bottom_right_adjacent_nodes[bottom_right]
           counter += 1 unless bottom_right.nil?
         end
-        return symbol if counter > 3
+        won = symbol if counter > 3
+        break if counter > 3
       end
       if bottom_left_adjacent_nodes[node]
         counter = 1
         bottom_left = bottom_left_adjacent_nodes[node]
-        counter += 1
+        counter += 1 unless bottom_left.nil?
         until bottom_left.nil?
-          bottom_left = nodes_array.select { |node| node.data.position == bottom_left.data }
-          bottom_left = bottom_left[0]
           bottom_left = bottom_left_adjacent_nodes[bottom_left]
           counter += 1 unless bottom_left.nil?
         end
-        return symbol if counter > 3
+        won = symbol if counter > 3
+        break if counter > 3
       end
     end
 
-    false
+    return won
 
     # nodes_array.each do |node|
     #   # possibilites are
