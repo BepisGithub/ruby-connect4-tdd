@@ -488,7 +488,7 @@ class Game
     name_two = gets.strip.chomp.to_s
     symbol_two = 'x'
     @player_two = Player.new(name_two, symbol_two)
-    puts "The symbol of #{@player_one} is #{@player_one.symbol} and the symbol of #{@player_two} is #{@player_two.symbol}"
+    puts "The symbol of #{@player_one.name} is #{@player_one.symbol} and the symbol of #{@player_two.name} is #{@player_two.symbol}"
   end
 
 end
