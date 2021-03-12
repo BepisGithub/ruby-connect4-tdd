@@ -446,5 +446,9 @@ describe Game do
       game.play
       expect(game.player_one.active).to eql(true).or(eql(false))
     end
-  end 
+    it 'allows the users to play in turns until one of them wins' do
+      game = Game.new
+      game.play
+    end
+  end
 end
