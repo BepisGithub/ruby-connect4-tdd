@@ -461,6 +461,16 @@ class Board
     end
     return false if first_player_nodes.size < 4 && second_player_nodes.size < 4
     # TODO: CALL THE WON FUNCTIONS
+    return diagonal_won?(first_player_nodes) if diagonal_won?(first_player_nodes)
+    return horizontal_won?(first_player_nodes) if horizontal_won?(first_player_nodes)
+    return vertical_won?(first_player_nodes) if vertical_won?(first_player_nodes)
+
+    return diagonal_won?(second_player_nodes) if diagonal_won?(second_player_nodes)
+    return horizontal_won?(second_player_nodes) if horizontal_won?(second_player_nodes)
+    return vertical_won?(second_player_nodes) if vertical_won?(second_player_nodes)
+
+    false
+
   end
 end
 
