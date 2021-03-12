@@ -221,10 +221,11 @@ class Board
 
   def horizontal_won?(nodes_array)
     return false if nodes_array.empty?
+    # binding.pry
     # check each row at a time
     symbol = nodes_array[0].data.occupant
     counter = 0
-      won = false
+    won = false
     right_node = {}
     left_node = {}
 
@@ -235,20 +236,25 @@ class Board
       y_coord = node.data.position[1]
       adjacent_nodes = node.data.adjacency_list.traverse
       adjacent_nodes.each do |adj_node|
-        right_node[node] = adj_node if adj_node.data == [x_coord + 1, y_coord]
-        left_node[node] = adj_node if adj_node.data == [x_coord - 1, y_coord]
+        pos_adj_node = nodes_array.select{ |n| n.data.position == adj_node.data }
+        pos_adj_node = pos_adj_node[0]
+        unless pos_adj_node.nil?
+          right_node[node] = pos_adj_node if pos_adj_node.data.position == [x_coord + 1, y_coord]
+          left_node[node] = pos_adj_node if pos_adj_node.data.position == [x_coord - 1, y_coord]
+        end
       end
+      # binding.pry
+
     end
 
     nodes_array.each do |node|
+      # binding.pry
       # check left or right
       if right_node[node]
         counter = 1
         right = right_node[node]
         counter += 1 unless right.nil?
         until right.nil?
-          right = nodes_array.select { |node| node.data.position == right.data }
-          right = right[0]
           right = right_node[right]
           counter += 1 unless right.nil?
         end
@@ -260,8 +266,6 @@ class Board
         left = left_node[node]
         counter += 1 unless left.nil?
         until left.nil?
-          left = nodes_array.select { |node| node.data.position == left.data}
-          left = left[0]
           left = left_node[left]
           counter += 1 unless left.nil?
         end
@@ -297,7 +301,6 @@ class Board
     # check each row at a time
     symbol = nodes_array[0].data.occupant
     counter = 0
-    rows = {}
     won = false
     top_node = {}
     bottom_node = {}
@@ -309,8 +312,12 @@ class Board
       y_coord = node.data.position[1]
       adjacent_nodes = node.data.adjacency_list.traverse
       adjacent_nodes.each do |adj_node|
-        top_node[node] = adj_node if adj_node.data == [x_coord, y_coord + 1]
-        bottom_node[node] = adj_node if adj_node.data == [x_coord, y_coord - 1]
+        pos_adj_node = nodes_array.select{ |n| n.data.position == adj_node.data }
+        pos_adj_node = pos_adj_node[0]
+        unless pos_adj_node.nil?
+          top_node[node] = pos_adj_node if pos_adj_node.data.position == [x_coord, y_coord + 1]
+          bottom_node[node] = pos_adj_node if pos_adj_node.data.position == [x_coord, y_coord - 1]
+        end
       end
     end
 
@@ -321,8 +328,6 @@ class Board
         top = top_node[node]
         counter += 1 unless top.nil?
         until top.nil?
-          top = nodes_array.select { |node| node.data.position == top.data }
-          top = top[0]
           top = top_node[top]
           counter += 1 unless top.nil?
         end
@@ -334,8 +339,6 @@ class Board
         bottom = bottom_node[node]
         counter += 1 unless bottom.nil?
         until bottom.nil?
-          bottom = nodes_array.select { |node| node.data.position == bottom.data}
-          bottom = bottom[0]
           bottom = bottom_node[bottom]
           counter += 1 unless bottom.nil?
         end
