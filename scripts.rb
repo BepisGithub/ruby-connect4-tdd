@@ -512,7 +512,7 @@ class Game
     puts "what is your column choice, #{active_player.name}? the choices are between 1 to 7"
     column_choice = gets.strip.chomp.to_i
     until column_choice > 0 && column_choice <= 7
-      puts 'Your choice must be an integer'
+      puts 'Your choice must be an integer with a maximum value of 7'
       column_choice = gets.strip.chomp.to_i
     end
     column_choice

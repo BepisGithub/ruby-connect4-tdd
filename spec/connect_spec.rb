@@ -345,7 +345,6 @@ describe Board do
       4.times do
         board.occupy(4, symbol)
       end
-      board.display
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to eql([symbol])
     end
@@ -359,7 +358,6 @@ describe Board do
     it 'only returns a truthy value if there are a diagonal 4 in a row in the same direction' do
       board = Board.new
       symbol = 'o'
-      board.display
       board.occupy(1, symbol)
       2.times do
         board.occupy(2, symbol)
@@ -367,7 +365,6 @@ describe Board do
       3.times do
         board.occupy(3, symbol)
       end
-      board.display
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to be false
     end
@@ -384,7 +381,6 @@ describe Board do
       4.times do
         board.occupy(4, symbol)
       end
-      board.display
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to eql([symbol])
     end
@@ -402,8 +398,6 @@ describe Board do
       3.times do 
         board.occupy(3, symbol)
       end
-      
-      board.display
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.diagonal_won?(occupied_nodes)).to be false
     end
