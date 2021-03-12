@@ -278,6 +278,15 @@ describe Board do
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.horizontal_won?(occupied_nodes)).to be false
     end
+    it 'returns false if there are four pieces: three in a row and one seperated by a space' do
+      board = Board.new
+      board.occupy(1, 'o')
+      board.occupy(2, 'o')
+      board.occupy(3, 'o')
+      board.occupy(5, 'o')
+      occupied_nodes = board.graph.list.occupied_nodes
+      expect(board.horizontal_won?(occupied_nodes)).to be false
+    end
     it 'returns false if there are three horizontal pieces in a row then a fourth not in a row' do
       board = Board.new
       board.occupy(1, 'o')
@@ -299,6 +308,16 @@ describe Board do
       board.occupy(4, 'o')
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.horizontal_won?(occupied_nodes)).to be_truthy
+    end
+    it 'works when there are four but seperated by another users piece' do
+      board = Board.new
+      board.occupy(1, 'o')
+      board.occupy(2, 'x')
+      board.occupy(3, 'o')
+      board.occupy(4, 'o')
+      board.occupy(5, 'o')
+      expect(board.won?).to be false
+
     end
   end
   describe '#vertical_won?' do
@@ -328,6 +347,16 @@ describe Board do
       end
       occupied_nodes = board.graph.list.occupied_nodes
       expect(board.vertical_won?(occupied_nodes)).to eql([symbol])
+    end
+    it 'returns false if there are 4 vertically stacked but seperated at one point by a different symbol' do
+      board = Board.new
+      symbol = 'o'
+      3.times do 
+        board.occupy(1, symbol)
+      end
+      board.occupy(1, 'x')
+      board.occupy(1, symbol)
+      expect(board.won?).to be false
     end
   end
   describe '#diagonal_won?' do
@@ -426,7 +455,7 @@ end
 
 describe Game do
   describe '#initialize' do
-    it 'creates a board then it creates two players asking for their names and auto asigning a symbol' do
+    xit 'creates a board then it creates two players asking for their names and auto asigning a symbol' do
       game = Game.new
       expect(game.board).to be_truthy
       expect(game.player_one).to be_truthy
@@ -434,12 +463,12 @@ describe Game do
     end
   end
   describe '#play' do
-    it 'sets the active states of a random player' do
+    xit 'sets the active states of a random player' do
       game = Game.new
       game.play
       expect(game.player_one.active).to eql(true).or(eql(false))
     end
-    it 'allows the users to play in turns until one of them wins' do
+    xit 'allows the users to play in turns until one of them wins' do
       game = Game.new
       game.play
     end

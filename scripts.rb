@@ -224,57 +224,126 @@ class Board
     # check each row at a time
     symbol = nodes_array[0].data.occupant
     counter = 0
-    rows = {}
-    6.times do |i|
-      rows[i + 1] = nodes_array.select { |node| node.data.position[1] == (i + 1) }
-    end
-    rows.each do |row_number, nodes_on_row|
-      next if nodes_on_row.size < 4
+      won = false
+    right_node = {}
+    left_node = {}
 
-      counter = 0
-      nodes_on_row.each do |node|
-        next if node.data.adjacency_list.empty?
+    nodes_array.each do |node|
+      next if node.data.adjacency_list.empty?
 
-        adjacent_nodes = node.data.adjacency_list.traverse
-        y_coord = node.data.position[1]
-        horizontal_adjacent_nodes = adjacent_nodes.select { |node| node.data[1] == y_coord }
-        next if horizontal_adjacent_nodes.empty?
-
-        counter += 1
+      x_coord = node.data.position[0]
+      y_coord = node.data.position[1]
+      adjacent_nodes = node.data.adjacency_list.traverse
+      adjacent_nodes.each do |adj_node|
+        right_node[node] = adj_node if adj_node.data == [x_coord + 1, y_coord]
+        left_node[node] = adj_node if adj_node.data == [x_coord - 1, y_coord]
       end
     end
-    return symbol if counter == 4
 
-    false
+    nodes_array.each do |node|
+      # check left or right
+      if right_node[node]
+        counter = 1
+        right = right_node[node]
+        counter += 1 unless right.nil?
+        until right.nil?
+          right = nodes_array.select { |node| node.data.position == right.data }
+          right = right[0]
+          right = right_node[right]
+          counter += 1 unless right.nil?
+        end
+        won = symbol if counter > 3
+        break if counter > 3
+      end
+      if left_node[node]
+        counter = 1
+        left = left_node[node]
+        counter += 1 unless left.nil?
+        until left.nil?
+          left = nodes_array.select { |node| node.data.position == left.data}
+          left = left[0]
+          left = left_node[left]
+          counter += 1 unless left.nil?
+        end
+        won = symbol if counter > 3
+        break if counter > 3
+      end
+    end
+    return won
+
+
+
+    # rows.each do |row_number, nodes_on_row|
+    #   next if nodes_on_row.size < 4
+    #   counter = 0
+    #   nodes_on_row.each do |node|
+    #     next if node.data.adjacency_list.empty?
+
+    #     adjacent_nodes = node.data.adjacency_list.traverse
+    #     y_coord = node.data.position[1]
+    #     horizontal_adjacent_nodes = adjacent_nodes.select { |node| node.data[1] == y_coord }
+    #     next if horizontal_adjacent_nodes.empty?
+
+    #     counter += 1
+    #   end
+    # end
+    # return symbol if counter == 4
+
+    # false
   end
 
   def vertical_won?(nodes_array)
     return false if nodes_array.empty?
-
+    # check each row at a time
     symbol = nodes_array[0].data.occupant
     counter = 0
-    columns = {}
-    7.times do |i|
-      columns[i + 1] = nodes_array.select { |node| node.data.position[0] == (i + 1) }
-    end
-    columns.each do |column_number, nodes_on_column|
-      next if nodes_on_column.size < 4
+    rows = {}
+    won = false
+    top_node = {}
+    bottom_node = {}
 
-      counter = 0
-      nodes_on_column.each do |node|
-        next if node.data.adjacency_list.empty?
+    nodes_array.each do |node|
+      next if node.data.adjacency_list.empty?
 
-        adjacent_nodes = node.data.adjacency_list.traverse
-        x_coord = node.data.position[0]
-        vertical_adjacent_nodes = adjacent_nodes.select { |node| node.data[0] == x_coord }
-        next if vertical_adjacent_nodes.empty?
-
-        counter += 1
+      x_coord = node.data.position[0]
+      y_coord = node.data.position[1]
+      adjacent_nodes = node.data.adjacency_list.traverse
+      adjacent_nodes.each do |adj_node|
+        top_node[node] = adj_node if adj_node.data == [x_coord, y_coord + 1]
+        bottom_node[node] = adj_node if adj_node.data == [x_coord, y_coord - 1]
       end
     end
-    return symbol if counter == 4
 
-    false
+    nodes_array.each do |node|
+      # check left or right
+      if top_node[node]
+        counter = 1
+        top = top_node[node]
+        counter += 1 unless top.nil?
+        until top.nil?
+          top = nodes_array.select { |node| node.data.position == top.data }
+          top = top[0]
+          top = top_node[top]
+          counter += 1 unless top.nil?
+        end
+        won = symbol if counter > 3
+        break if counter > 3
+      end
+      if bottom_node[node]
+        counter = 1
+        bottom = bottom_node[node]
+        counter += 1 unless bottom.nil?
+        until bottom.nil?
+          bottom = nodes_array.select { |node| node.data.position == bottom.data}
+          bottom = bottom[0]
+          bottom = bottom_node[bottom]
+          counter += 1 unless bottom.nil?
+        end
+        won = symbol if counter > 3
+        break if counter > 3
+      end
+    end
+    return won
   end
 
   def diagonal_won?(nodes_array)
@@ -320,7 +389,8 @@ class Board
           counter += 1 unless top_right.nil?
         end
         return symbol if counter > 3
-      elsif top_left_adjacent_nodes[node]
+      end
+      if top_left_adjacent_nodes[node]
         counter = 1
         top_left = top_left_adjacent_nodes[node]
         counter += 1
@@ -331,7 +401,8 @@ class Board
           counter += 1 unless top_left.nil?
         end
         return symbol if counter > 3
-      elsif bottom_right_adjacent_nodes[node]
+      end
+      if bottom_right_adjacent_nodes[node]
         counter = 1
         bottom_right = bottom_right_adjacent_nodes[node]
         counter += 1
@@ -342,8 +413,8 @@ class Board
           counter += 1 unless bottom_right.nil?
         end
         return symbol if counter > 3
-        
-      elsif bottom_left_adjacent_nodes[node]
+      end
+      if bottom_left_adjacent_nodes[node]
         counter = 1
         bottom_left = bottom_left_adjacent_nodes[node]
         counter += 1
@@ -453,7 +524,6 @@ class Board
   def won?
     occupied_nodes = @graph.list.occupied_nodes
     return false if occupied_nodes.empty?
-
     first_player_symbol = occupied_nodes[0].data.occupant
     first_player_nodes = []
     second_player_symbol = nil
