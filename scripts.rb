@@ -508,6 +508,16 @@ class Game
     puts "The symbol of #{@player_one.name} is #{@player_one.symbol} and the symbol of #{@player_two.name} is #{@player_two.symbol}"
   end
 
+  def get_column_choice(active_player)
+    puts "what is your column choice, #{active_player.name}? the choices are between 1 to 7"
+    column_choice = gets.strip.chomp.to_i
+    until column_choice > 0 && column_choice <= 7
+      puts 'Your choice must be an integer'
+      column_choice = gets.strip.chomp.to_i
+    end
+    column_choice
+  end
+
   def play
     rand_num = rand(1..10)
     rand_num % 2 ? @player_one.active = true : @player_two.active = true
@@ -517,11 +527,13 @@ class Game
     until result
       # one of the players is active
       @player_one.active == true ? active_player = @player_one : active_player = @player_two
-      puts "what is your column choice, #{active_player.name}? the choices are between 1 to 7"
-      column_choice = 'nil'
-      column_choice = gets.strip.chomp.to_i until column_choice.is_a? Integer
+      column_choice = get_column_choice(active_player)
       occupy_attempt = @board.occupy(column_choice, active_player.symbol)
-      occupy_attempt = @board.occupy(column_choice, active_player.symbol) until occupy_attempt != 'error: column full'
+      until occupy_attempt != 'error: column full'
+        puts occupy_attempt
+        column_choice = get_column_choice(active_player)
+        occupy_attempt = @board.occupy(column_choice, active_player.symbol)
+      end
       @board.display
       result = @board.won?
       @player_one.active = !(@player_one.active)
