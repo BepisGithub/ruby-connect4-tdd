@@ -509,7 +509,7 @@ class Game
   end
 
   def get_column_choice(active_player)
-    puts "what is your column choice, #{active_player.name}? the choices are between 1 to 7"
+    puts "What is your column choice, #{active_player.name}? Your symbol is #{active_player.symbol}. The choices are between 1 to 7"
     column_choice = gets.strip.chomp.to_i
     until column_choice > 0 && column_choice <= 7
       puts 'Your choice must be an integer with a maximum value of 7'
