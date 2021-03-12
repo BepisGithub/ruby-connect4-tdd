@@ -106,7 +106,7 @@ class Graph
 end
 
 class Board
-  attr_accessor :graph
+  attr_accessor :graph, :index_array
 
   def initialize
     @graph = Graph.new
@@ -115,6 +115,10 @@ class Board
 
   def populate_graph
     horizontal_node_number = 7
+    @index_array = []
+    horizontal_node_number.times do |i|
+      @index_array.push((i + 1).to_s)
+    end
     vertical_node_number = 6
     # horizontal_node_number.times do |i|
     #   vertical_node_number.times do |j|
@@ -198,6 +202,9 @@ class Board
         vertical = linked_node.data.position[1]
       end
     end
+    puts ''
+    puts @index_array.to_s
+    # puts ['1', '2', '3', '4', '5', '6', '7'].to_s
   end
 
   def occupy(column, symbol)
