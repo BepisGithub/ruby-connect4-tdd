@@ -440,4 +440,11 @@ describe Game do
       expect(game.player_two).to be_truthy
     end
   end
+  describe '#play' do
+    it 'sets the active states of a random player' do
+      game = Game.new
+      game.play
+      expect(game.player_one.active).to eql(true).or (game.player_two.active).to be true
+    end
+  end 
 end
