@@ -254,8 +254,7 @@ describe Board do
       4.times do |i|
         board.occupy(i + 1, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.horizontal_won?(occupied_nodes)).to eql([symbol])
+      expect(board.won?).to be_truthy
     end
     it 'returns false if an empty array is passed' do
       board = Board.new
@@ -266,8 +265,8 @@ describe Board do
       3.times do |i|
         board.occupy(i + 1, 'o')
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.horizontal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'returns false if there are four horizontal pieces but not in a row' do
       board = Board.new
@@ -284,8 +283,8 @@ describe Board do
       board.occupy(2, 'o')
       board.occupy(3, 'o')
       board.occupy(5, 'o')
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.horizontal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'returns false if there are three horizontal pieces in a row then a fourth not in a row' do
       board = Board.new
@@ -293,8 +292,8 @@ describe Board do
       board.occupy(2, 'o')
       board.occupy(3, 'o')
       board.occupy(5, 'o')
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.horizontal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'works for the second row (and hopefully all the others)' do
       board = Board.new
@@ -306,8 +305,7 @@ describe Board do
       board.occupy(2, 'o')
       board.occupy(3, 'o')
       board.occupy(4, 'o')
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.horizontal_won?(occupied_nodes)).to be_truthy
+      expect(board.won?).to be_truthy
     end
     it 'works when there are four but seperated by another users piece' do
       board = Board.new
@@ -327,8 +325,8 @@ describe Board do
       4.times do 
         board.occupy(1, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.vertical_won?(occupied_nodes)).to eql([symbol])
+      expect(board.won?).to be_truthy
+
     end
     it 'returns false if there is no vertical winner' do
       board = Board.new
@@ -336,8 +334,8 @@ describe Board do
       3.times do 
         board.occupy(1, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.vertical_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'works for the second column' do
       board = Board.new
@@ -345,8 +343,7 @@ describe Board do
       4.times do
         board.occupy(2, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.vertical_won?(occupied_nodes)).to eql([symbol])
+      expect(board.won?).to be_truthy
     end
     it 'returns false if there are 4 vertically stacked but seperated at one point by a different symbol' do
       board = Board.new
@@ -373,15 +370,14 @@ describe Board do
       4.times do
         board.occupy(4, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.diagonal_won?(occupied_nodes)).to eql([symbol])
+      expect(board.won?).to be_truthy
     end
     it 'returns false if there is no diagonal 4 in a row' do
       board = Board.new
       symbol = 'o'
       board.occupy(1, symbol)
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.diagonal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'only returns a truthy value if there are a diagonal 4 in a row in the same direction' do
       board = Board.new
@@ -393,8 +389,8 @@ describe Board do
       3.times do
         board.occupy(3, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.diagonal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
     it 'works when going from the right side' do
       board = Board.new
@@ -409,8 +405,8 @@ describe Board do
       4.times do
         board.occupy(4, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.diagonal_won?(occupied_nodes)).to eql([symbol])
+      expect(board.won?).to be_truthy
+
     end
     it 'works with 4 pieces together but not diagonally' do
       board = Board.new
@@ -426,8 +422,8 @@ describe Board do
       3.times do 
         board.occupy(3, symbol)
       end
-      occupied_nodes = board.graph.list.occupied_nodes
-      expect(board.diagonal_won?(occupied_nodes)).to be false
+      expect(board.won?).to be false
+
     end
   end
 end
